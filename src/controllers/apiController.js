@@ -6,7 +6,7 @@ import quicker from '../utils/quicker.js'
 export default {
      self: (req, res, next) => {
           try {
-               httpresponse(req, res, 200, responseMessage.SUCESS)
+               httpresponse(req, res, 200, responseMessage.SUCCESS)
           } catch (err) {
                httpError(next, err, req, 500)
           }
@@ -18,7 +18,7 @@ export default {
                     system: quicker.getSystemHealth(),
                     timestamp: Date.now()
                }
-               httpresponse(req, res, 200, responseMessage.SUCESS, healthData)
+               httpresponse(req, res, 200, responseMessage.SUCCESS, healthData)
           } catch (err) {
                httpError(next, err, req, 500)
           }
