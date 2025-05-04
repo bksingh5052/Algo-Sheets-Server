@@ -15,5 +15,11 @@ export default {
      OTP_SENT: 'OTP sent successfully. Please verify your email.',
      OTP_ALREADY_SENT: 'OTP already sent. Please check your email.',
      OTP_EXPIRED: 'OTP expired. Please request a new one.',
-     OTP_VERIFIED: 'OTP verified successfully.'
+     OTP_VERIFIED: 'OTP verified successfully.',
+     PROBLEM_CREATED: 'Problem created successfully.',
+     PROBLEMS_FETCHED: 'Problems fetched successfully.',
+     PROBLEM_UPDATED: 'Problem updated successfully.',
+     PROBLEM_DELETED: 'Problem deleted successfully.',
+     LANGUAGE_NOT_SUPPORTED: (language) => `Language ${language} is not supported`,
+     TESTCASE_FAILED: (testcaseId, testcaseLanguage) => `Testcase ${testcaseId} failed for language ${testcaseLanguage}`
 }

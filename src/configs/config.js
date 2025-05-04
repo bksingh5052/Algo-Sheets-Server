@@ -20,18 +20,12 @@ const config = {
      RESEND_MAIL_FROM: process.env.RESEND_MAIL_FROM,
 
      // token
-     // ACCESS_TOKEN: {
-     //      SECRET: process.env.ACCESS_TOKEN_SECRET,
-     //      EXPIRY: 3600
-     // },
-     // REFRESH_TOKEN: {
-     //      SECRET: process.env.REFRESH_TOKEN_SECRET,
-     //      EXPIRY:
-     // }
      ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
      REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
      ACCESS_TOKEN_EXPIRY: process.env.ACCESS_TOKEN_EXPIRY,
-     REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY
+     REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY,
+
+     JUDGE0_API_URL: process.env.JUDGE0_API_URL
 }
 
 function checkRequiredEnvVars(requiredEnvVars) {

@@ -2,3 +2,20 @@ node_modules
 .env.development
 .env.production
 .env
+
+
+# Prisma generated client
+/src/generated/prisma/
+
+# Optional: if you use this path
+/prisma/generated/
+
+# Prisma binaries (sometimes appear here during development)
+prisma/*.js
+prisma/*.ts
+prisma/*.d.ts
+prisma/*.dll.node
+
+# Good to keep
+!prisma/schema.prisma
+!prisma/migrations/

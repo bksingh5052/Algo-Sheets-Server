@@ -14,6 +14,8 @@ import config from './configs/config.js'
 import authRouter from './routers/authRouter.js'
 import cookieParser from 'cookie-parser'
 
+import problemRouter from './routers/problemRouter.js'
+
 const app = express()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -41,6 +43,7 @@ app.use(express.static(path.join(__dirname, '../', 'public')))
 
 app.use('/api/v1', router)
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/problems', problemRouter)
 
 // 404 Handler
 app.use((req, _, next) => {
