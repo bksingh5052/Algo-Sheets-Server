@@ -16,7 +16,7 @@ export default {
                     const languageId = qickuer.getJudge0LanguageId(language)
 
                     if (!languageId) {
-                         return httpError(next, responseMessage.LANGUAGE_NOT_SUPPORTED(language), req, 400)
+                         return httpError(next, new Error(responseMessage.LANGUAGE_NOT_SUPPORTED(language)), req, 400)
                     }
 
                     //
@@ -36,7 +36,7 @@ export default {
                     for (let i = 0; i < results.length; i++) {
                          const result = results[i]
                          if (result.status.id !== 3) {
-                              return httpError(next, responseMessage.TESTCASE_FAILED(`${i + 1}`, `${language}`), req, 400)
+                              return httpError(next, new Error(responseMessage.TESTCASE_FAILED(`${i + 1}`, `${language}`)), req, 400)
                          }
                     }
                }
@@ -65,7 +65,7 @@ export default {
                const problems = await db.problem.findMany()
 
                if (!problems) {
-                    return httpError(next, responseMessage.NOT_FOUND('Problems'), req, 404)
+                    return httpError(next, new Error(responseMessage.NOT_FOUND('Problems')), req, 404)
                }
 
                return httpResponse(req, res, 200, responseMessage.PROBLEMS_FETCHED, problems)
@@ -84,7 +84,7 @@ export default {
                })
 
                if (!problem) {
-                    return httpError(next, responseMessage.NOT_FOUND('Problem'), req, 404)
+                    return httpError(next, new Error(responseMessage.NOT_FOUND('Problem')), req, 404)
                }
 
                return httpResponse(req, res, 200, responseMessage.PROBLEMS_FETCHED, problem)
@@ -99,7 +99,7 @@ export default {
                const problem = await db.problem.findUnique({ where: { id: problemId } })
 
                if (!problem) {
-                    return httpError(next, responseMessage.NOT_FOUND('Problem'), req, 404)
+                    return httpError(next, new Error(responseMessage.NOT_FOUND('Problem')), req, 404)
                }
 
                await db.problem.delete({ where: { id: problemId } })
