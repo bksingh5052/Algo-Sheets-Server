@@ -107,7 +107,73 @@ export default {
           } catch (error) {
                return httpError(next, error, req)
           }
+     },
+     updateProblem: async (req, res, next) => {
+          const { problemId } = req.params
+          const { title, description, difficulty, tags, examples, constraints, testcases, codeSnippets, referenceSolutions } = req.body
+          const user = req.authenticatedUser
+
+          try {
+               const problem = await db.problem.findUnique({ where: { id: problemId } })
+
+               if (!problem) {
+                    return httpError(next, new Error(responseMessage.NOT_FOUND('Problem')), req, 404)
+               }
+
+               // Check if the user is the owner of the problem
+               if (problem.userId !== user.id) {
+                    return httpError(next, new Error(responseMessage.UNAUTHORIZED), req, 403)
+               }
+
+               // Validate the reference solutions against the test cases
+               for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
+                    const languageId = qickuer.getJudge0LanguageId(language)
+
+                    if (!languageId) {
+                         return httpError(next, new Error(responseMessage.LANGUAGE_NOT_SUPPORTED(language)), req, 400)
+                    }
+
+                    //
+                    const submissions = testcases.map(({ input, output }) => ({
+                         source_code: solutionCode,
+                         language_id: languageId,
+                         stdin: input,
+                         expected_output: output
+                    }))
+
+                    const submissionResults = await qickuer.submitBatch(submissions)
+
+                    const tokens = submissionResults.map((res) => res.token)
+
+                    const results = await qickuer.pollBatchResults(tokens)
+
+                    for (let i = 0; i < results.length; i++) {
+                         const result = results[i]
+                         if (result.status.id !== 3) {
+                              return httpError(next, new Error(responseMessage.TESTCASE_FAILED(`${i + 1}`, `${language}`)), req, 400)
+                         }
+                    }
+               }
+
+               const updatedProblem = await db.problem.update({
+                    where: { id: problemId },
+                    data: {
+                         title,
+                         description,
+                         difficulty,
+                         tags,
+                         examples,
+                         constraints,
+                         testcases,
+                         codeSnippets,
+                         referenceSolutions
+                    }
+               })
+
+               return httpResponse(req, res, 200, responseMessage.PROBLEM_UPDATED, updatedProblem)
+          } catch (error) {
+               return httpError(next, error, req)
+          }
      }
-     // updateProblem: async (req, res, next) => {},
      // getAllProblemsSolvedByUser: async (req, res, next) => {}
 }

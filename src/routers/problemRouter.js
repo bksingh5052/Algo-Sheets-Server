@@ -13,4 +13,6 @@ router
      .route('/:problemId')
      .get(problemController.getProblemById)
      .delete(authMiddleware.authenticate, authMiddleware.authorize(['ADMIN']), problemController.deleteProblem)
+     .put(authMiddleware.authenticate, authMiddleware.authorize(['ADMIN']), problemController.updateProblem)
+
 export default router

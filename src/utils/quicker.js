@@ -70,9 +70,6 @@ export default {
                submissions
           })
 
-          // eslint-disable-next-line no-console
-          console.dir('Submission Results: ', data)
-
           return data // [{token} , {token} , {token}]
      }
 }
