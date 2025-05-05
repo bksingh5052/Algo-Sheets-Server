@@ -1,5 +1,5 @@
 {
-    "name": "leet-lab",
+    "name": "algosheets",
     "version": "1.0.0",
     "type": "module",
     "main": "src/server.js",
