@@ -54,7 +54,7 @@ const MongodbTransport = () => {
      return [
           new transports.MongoDB({
                level: 'info',
-               db: config.DATABASE_URL_LOGGING,
+               db: config.DATABASE_URL,
                metaKey: 'meta',
                expireAfterSeconds: 3600 * 24 * 30,
                collection: 'application-logs'

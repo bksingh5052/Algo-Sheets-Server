@@ -2,7 +2,7 @@ import config from '../configs/config.js'
 import responseMessage from '../constants/responseMessage.js'
 import httpError from '../utils/httpError.js'
 import quicker from '../utils/quicker.js'
-import { db } from '../libs/pg-db.js'
+import { User } from '../models/index.js'
 
 export default {
      authenticate: async (req, res, next) => {
@@ -11,7 +11,8 @@ export default {
                if (accessToken) {
                     const { userId } = quicker.verifyToken(accessToken, config.ACCESS_TOKEN_SECRET)
                     if (userId) {
-                         const user = await db.user.findUnique({ where: { id: userId } })
+                         const user = await User.findById(userId)
+
                          if (user) {
                               req.authenticatedUser = user
                               return next()

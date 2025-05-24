@@ -6,7 +6,6 @@ const config = {
      PORT: process.env.PORT,
      SERVER_URL: process.env.SERVER_URL,
      DATABASE_URL: process.env.DATABASE_URL,
-     DATABASE_URL_LOGGING: process.env.DATABASE_URL_LOGGING,
      CLIENT_URL: process.env.CLIENT_URL,
      COMPANY_NAME: process.env.COMPANY_NAME,
      COMPANY_SUPPORT_EMAIL: process.env.COMPANY_SUPPORT_EMAIL,

@@ -10,11 +10,7 @@
         "formate:fix": "prettier . --write",
         "dev": "cross-env NODE_ENV=development nodemon --legacy-watch src/server.js",
         "start": "cross-env NODE_ENV=production node src/server.js",
-        "prepare": "husky",
-        "prisma:generate:dev": "cross-env NODE_ENV=development prisma generate",
-        "prisma:generate:prod": "cross-env NODE_ENV=production prisma generate",
-        "prisma:migrate:dev": "cross-env NODE_ENV=development prisma migrate dev",
-        "prisma:migrate:prod": "cross-env NODE_ENV=production prisma migrate deploy"
+        "prepare": "husky"
     },
     "keywords": [],
     "author": "",
@@ -39,7 +35,6 @@
         "prettier": "3.3.3"
     },
     "dependencies": {
-        "@prisma/client": "^6.6.0",
         "axios": "^1.9.0",
         "bcryptjs": "^3.0.2",
         "colorette": "^2.0.20",
@@ -54,7 +49,6 @@
         "mongoose": "^8.6.3",
         "otp-generator": "^4.0.1",
         "path": "^0.12.7",
-        "prisma": "^6.6.0",
         "rate-limiter-flexible": "^5.0.3",
         "resend": "^4.4.1",
         "winston": "^3.14.2",
